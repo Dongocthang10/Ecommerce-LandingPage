@@ -1,0 +1,100 @@
+/* Space theme: overrides the shadcn tokens from globals.css (import it after globals.css). */
+:root {
+  --background: hsl(230 45% 98%);
+  --foreground: hsl(235 50% 10%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(235 50% 10%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(235 50% 10%);
+  --primary: hsl(258 75% 50%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(232 40% 92%);
+  --secondary-foreground: hsl(235 50% 14%);
+  --muted: hsl(232 40% 94%);
+  --muted-foreground: hsl(235 18% 40%);
+  --accent: hsl(232 40% 92%);
+  --accent-foreground: hsl(235 50% 14%);
+  --border: hsl(232 30% 87%);
+  --input: hsl(232 30% 87%);
+  --ring: hsl(258 75% 50%);
+  --star: hsl(258 70% 45%); --star-opacity: 0.14;
+  --glow: 258 90% 65%; --glow-a: 0.12;
+}
+.dark {
+  --background: hsl(235 55% 5%);
+  --foreground: hsl(225 40% 96%);
+  --card: hsl(235 45% 8%);
+  --card-foreground: hsl(225 40% 96%);
+  --popover: hsl(235 45% 8%);
+  --popover-foreground: hsl(225 40% 96%);
+  --primary: hsl(262 90% 68%);
+  --primary-foreground: hsl(235 55% 6%);
+  --secondary: hsl(235 35% 17%);
+  --secondary-foreground: hsl(225 40% 96%);
+  --muted: hsl(235 38% 13%);
+  --muted-foreground: hsl(230 20% 68%);
+  --accent: hsl(235 35% 17%);
+  --accent-foreground: hsl(225 40% 96%);
+  --border: hsl(235 30% 20%);
+  --input: hsl(235 30% 20%);
+  --ring: hsl(262 90% 68%);
+  --star: hsl(0 0% 100%); --star-opacity: 0.9;
+  --glow: 262 90% 60%; --glow-a: 0.25;
+}
+
+
+/* Space background layers */
+.space-sky,
+.space-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.space-sky {
+  z-index: 0;
+  opacity: var(--star-opacity);
+  background-size: 420px 420px;
+  animation: twinkle 7s ease-in-out infinite alternate;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, var(--star), transparent),
+    radial-gradient(1.5px 1.5px at 28% 72%, var(--star), transparent),
+    radial-gradient(1px 1px at 46% 34%, var(--star), transparent),
+    radial-gradient(2px 2px at 63% 81%, var(--star), transparent),
+    radial-gradient(1px 1px at 78% 22%, var(--star), transparent),
+    radial-gradient(1.5px 1.5px at 90% 58%, var(--star), transparent),
+    radial-gradient(1px 1px at 5% 90%, var(--star), transparent),
+    radial-gradient(1px 1px at 55% 8%, var(--star), transparent);
+}
+
+.space-glow {
+  z-index: 0;
+  background:
+    radial-gradient(
+      50% 35% at 85% 0%,
+      hsl(var(--glow) / var(--glow-a)),
+      transparent
+    ),
+    radial-gradient(
+      40% 30% at 0% 55%,
+      hsl(300 80% 55% / calc(var(--glow-a) * 0.5)),
+      transparent
+    );
+}
+
+/* Keep the application content above the background layers */
+body > :not(.space-sky):not(.space-glow) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-sky {
+    animation: none;
+  }
+
+  .orbit {
+    animation: none;
+  }
+}
+
